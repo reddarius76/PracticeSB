@@ -38,14 +38,14 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V47-pq-eYl">
-                                <rect key="frame" x="93" y="424" width="134" height="40"/>
+                                <rect key="frame" x="109.5" y="424" width="101" height="40"/>
                                 <color key="backgroundColor" systemColor="systemBlueColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100.99999999999997" id="3MR-MA-D04"/>
                                     <constraint firstAttribute="height" constant="40" id="Htb-2D-hwR"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                <state key="normal" title="4323523727">
+                                <state key="normal" title="Start">
                                     <color key="titleColor" systemColor="systemGray5Color"/>
                                 </state>
                                 <connections>
