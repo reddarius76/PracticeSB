@@ -19,7 +19,6 @@ class ViewController: UIViewController {
     private let lightOff: CGFloat = 0.4
     
     override func viewWillLayoutSubviews() {
-        
         redSignalView.layer.cornerRadius = redSignalView.frame.size.width/2
         yellowSignalView.layer.cornerRadius =  yellowSignalView.frame.size.width/2
         greenSignalView.layer.cornerRadius =  greenSignalView.frame.size.width/2
