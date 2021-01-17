@@ -20,33 +20,25 @@ class MainViewController: UIViewController {
     @IBOutlet var delayLabel: UILabel!
     
     //MARK: Private properties
-    private var animationPresets = [String]()
-    private var animationCurves = [String]()
+    private var animationPresets = Spring.AnimationPreset.self.allCases.shuffled()
+    private var animationCurves = Spring.AnimationCurve.self.allCases.shuffled()
     private var countPressed = 0
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        animationPresets = enumarateAnimationPreset()
-        animationCurves = enumarateAnimationCurve()
-
-    }
-
     //MARK: IBAction
     @IBAction func runButton(_ sender: SpringButton) {
         resetText()
         
         if countPressed == animationPresets.count { countPressed = 0 }
 
-        animationView.animation = animationPresets[countPressed]
-        animationView.curve = animationCurves[countPressed]
-        animationView.force = CGFloat(Double.random(in: 0.1..<1.5))
-        animationView.duration = CGFloat(Double.random(in: 1..<3))
-        animationView.delay = CGFloat(Double.random(in: 0..<0.5))
+        animationView.animation = animationPresets[countPressed].rawValue
+        animationView.curve = animationCurves[countPressed].rawValue
+        animationView.force = CGFloat(Double.random(in: 0.1...1.5))
+        animationView.duration = CGFloat(Double.random(in: 1...3))
+        animationView.delay = CGFloat(Double.random(in: 0...0.5))
         animationView.animate()
         
         setText()
-        runButtonText.setTitle("Run " + animationPresets[countPressed + 1], for: .normal)
+        runButtonText.setTitle("Run " + animationPresets[countPressed + 1].rawValue, for: .normal)
         
         countPressed += 1
     }
