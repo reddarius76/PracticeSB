@@ -44,27 +44,6 @@ class MainViewController: UIViewController {
     }
 }
 
-//MARK: enumarate enum AnimationPreset and AnimationCurve
-extension MainViewController {
-    private func enumarateAnimationPreset() -> [String] {
-        var animationPresets = [String]()
-        for animation in Spring.AnimationPreset.self.allCases {
-            animationPresets.append(animation.rawValue)
-        }
-       
-        return animationPresets.shuffled()
-    }
-    
-    private func enumarateAnimationCurve() -> [String] {
-        var animationCurves = [String]()
-        for animation in Spring.AnimationCurve.self.allCases {
-            animationCurves.append(animation.rawValue)
-        }
-       
-        return animationCurves.shuffled()
-    }
-}
-
 //MARK: Output Text
 extension MainViewController {
     private func setText() {
