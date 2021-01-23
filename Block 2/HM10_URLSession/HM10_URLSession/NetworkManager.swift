@@ -15,10 +15,10 @@ class NetworkManagerWeather {
     
     func fetchWeather(forCity city: String, completion: @escaping (WeatherInfo) -> Void)  {
         
-        let api_key = "539a1232e52fd50dd6986a8dd65074fc"
-        let url_api = "https://api.openweathermap.org/data/2.5/weather?q=\(city)&units=metric&appid=\(api_key)"
+        let apiKey = APIConfig.shared.apiKey
+        let urlAPI = "https://api.openweathermap.org/data/2.5/weather?q=\(city)&units=metric&appid=\(apiKey)"
         
-        guard let url = URL(string: url_api) else { return }
+        guard let url = URL(string: urlAPI) else { return }
         
         URLSession.shared.dataTask(with: url) { data, _, error in
             guard let data = data, error == nil else { return }
