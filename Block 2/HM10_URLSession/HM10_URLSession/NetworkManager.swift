@@ -24,7 +24,9 @@ class NetworkManagerWeather {
             guard let data = data, error == nil else { return }
             
             do {
-                let weatherInfoCurrent = try JSONDecoder().decode(WeatherInfo.self, from: data)
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let weatherInfoCurrent = try decoder.decode(WeatherInfo.self, from: data)
                 DispatchQueue.main.async {
                     completion(weatherInfoCurrent)
                 }
