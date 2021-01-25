@@ -18,8 +18,8 @@ class CharacterCell: UITableViewCell {
         }
     }
     
-    func configureCell(with result: Character?) {
-        characterNameLable.text = result?.name
+    func configureCell(with result: Character?, index: Int) {
+        characterNameLable.text = "\(result?.name ?? "") - \(index + 1)"
         characterImage.fetchImageCharacter(from: result?.image ?? "")
     }
 }
