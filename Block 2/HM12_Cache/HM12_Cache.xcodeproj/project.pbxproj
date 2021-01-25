@@ -64,13 +64,13 @@
 		73E680AD25BDE8FC00A22EC2 /* HM12_Cache */ = {
 			isa = PBXGroup;
 			children = (
-				73E680CC25BE173500A22EC2 /* CharacterModal.swift */,
-				73E680D825BEE30900A22EC2 /* NetworkManager.swift */,
+				73E680DF25BF1CF000A22EC2 /* Views */,
+				73E680E125BF339F00A22EC2 /* Modal */,
 				73E680C325BDE90D00A22EC2 /* Supporting files */,
 				73E680C825BDE93300A22EC2 /* View Controllers */,
 				73E680C625BDE92800A22EC2 /* Storyboards */,
 				73E680B725BDE8FE00A22EC2 /* Assets.xcassets */,
-				73E680DF25BF1CF000A22EC2 /* Views */,
+				73E680DC25BF1CDF00A22EC2 /* CharacterImageView.swift */,
 			);
 			path = HM12_Cache;
 			sourceTree = "<group>";
@@ -105,10 +105,18 @@
 		73E680DF25BF1CF000A22EC2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				73E680D825BEE30900A22EC2 /* NetworkManager.swift */,
 				73E680D425BEC82E00A22EC2 /* CharacterCell.swift */,
-				73E680DC25BF1CDF00A22EC2 /* CharacterImageView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		73E680E125BF339F00A22EC2 /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+				73E680CC25BE173500A22EC2 /* CharacterModal.swift */,
+			);
+			path = Modal;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
