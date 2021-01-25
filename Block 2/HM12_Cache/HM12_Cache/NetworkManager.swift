@@ -10,7 +10,7 @@ import Foundation
 class NetworkManager {
     static let shared = NetworkManager()
     
-    //MARK: - fetchInfoCharacter
+    //MARK: - fetchInfoCharacter()
     func fetchInfoCharacter(from url: String, with comletion: @escaping (CharacterInfo) -> Void) {
         guard let url = URL(string: url) else { return }
         
@@ -31,15 +31,17 @@ class NetworkManager {
         }.resume()
     }
     
-    //MARK: - fetchInfoCharacter
+    //MARK: - fetchCharacter()
     func fetchCharacter(from url: String, with comletion: @escaping (Character) -> Void) {
         guard let url = URL(string: url) else { return }
         
-        URLSession.shared.dataTask(with: url) { data, _, error in
-            guard let data = data else {
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data, let response = response else {
                 print(error?.localizedDescription ?? "no localized description")
                 return
             }
+            
+            guard url == response.url else { return }
             
             do {
                 let result = try JSONDecoder().decode(Character.self, from: data)
@@ -52,5 +54,18 @@ class NetworkManager {
         }.resume()
     }
     
+    //MARK: - fetchImage()
+    func fetchImage(from url: URL, with comletion: @escaping (Data, URLResponse) -> Void) {
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data, let response = response else {
+                print(error?.localizedDescription ?? "no localized description")
+                return
+            }
+            guard url == response.url else { return }
+            comletion(data, response)
+        }.resume()
+    }
+    
+    //MARK: - Private init()
     private init() {}
 }
