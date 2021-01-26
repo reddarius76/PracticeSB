@@ -26,7 +26,7 @@ class NetworkManager {
                     comletion(result)
                 }
             } catch let error {
-                print("JSONDecoder error: \(error)")
+                print("fetchInfoCharacter JSONDecoder error: \(error)")
             }
         }.resume()
     }
@@ -49,7 +49,7 @@ class NetworkManager {
                     comletion(result)
                 }
             } catch let error {
-                print("JSONDecoder error: \(error)")
+                print("fetchCharacter JSONDecoder error: \(error)")
             }
         }.resume()
     }

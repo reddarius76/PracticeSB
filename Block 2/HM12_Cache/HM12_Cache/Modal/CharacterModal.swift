@@ -70,10 +70,20 @@ struct Character: Decodable {
     let episode: [String]?
     let url: String?
     let created: String?
+    
+    var description: String {
+        """
+    Status: \(status ?? "unknown")
+    Species: \(species ?? "unknown")
+    Gender: \(gender ?? "unknown")
+    Origin: \(origin?.name ?? "unknown")
+    Location: \(location?.name ?? "unknown")
+    """
+    }
 }
 
 // MARK: - API URLs
-enum API: String {
+enum urlAPI: String {
     case urlCharacter = "https://rickandmortyapi.com/api/character/"
     case urlLocation = "https://rickandmortyapi.com/api/location/"
     case urlEpisode = "https://rickandmortyapi.com/api/episode/"

@@ -19,10 +19,17 @@ class MainViewController: UITableViewController {
         URLCache.shared.diskCapacity = 52428800
         //URLCache.shared.removeAllCachedResponses()
         
-        NetworkManager.shared.fetchInfoCharacter(from: API.urlCharacter.rawValue) { infoCharacter in
+        NetworkManager.shared.fetchInfoCharacter(from: urlAPI.urlCharacter.rawValue) { infoCharacter in
             self.countCharacters = infoCharacter.info?.count
             self.tableView.reloadData()
         }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let indexPath = tableView.indexPathForSelectedRow else { return }
+        let characterID = indexPath.row + 1
+        let detailCharacterVC = segue.destination as! DetailCharacterViewController
+        detailCharacterVC.characterID = characterID
     }
 }
 
@@ -36,21 +43,20 @@ extension MainViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CharacterCell
         let index = indexPath.row
         
-        NetworkManager.shared.fetchCharacter(from: API.urlCharacter.rawValue + String(index + 1)) { character in
-            cell.configureCell(with: character, index: index)
+        NetworkManager.shared.fetchCharacter(from: urlAPI.urlCharacter.rawValue + String(index + 1)) { character in
+            cell.configureCell(with: character)
         }
         
-        let a = """
-            index: \(index + 1)
-            currentDiskUsage: \(URLCache.shared.currentDiskUsage / 1024) kb
-            currentMemoryUsage: \(URLCache.shared.currentMemoryUsage / 1024) kb
-            diskCapacity: \(URLCache.shared.diskCapacity / 1024) kb
-            memoryCapacity: \(URLCache.shared.memoryCapacity / 1024) kb
-            ---------------
-        """
-        print(a)
+//        let infoCacheUsage = """
+//            index: \(index + 1)
+//            currentDiskUsage: \(URLCache.shared.currentDiskUsage / 1024) kb
+//            currentMemoryUsage: \(URLCache.shared.currentMemoryUsage / 1024) kb
+//            diskCapacity: \(URLCache.shared.diskCapacity / 1024) kb
+//            memoryCapacity: \(URLCache.shared.memoryCapacity / 1024) kb
+//            ---------------
+//        """
+//        print(infoCacheUsage)
             
-        
         return cell
     }
 }

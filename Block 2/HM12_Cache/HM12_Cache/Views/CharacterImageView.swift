@@ -9,19 +9,20 @@ import UIKit
 
 class CharacterImageView: UIImageView {
 
+    //MARK: - fetchImageCharacter()
     func fetchImageCharacter(from url: String) {
         guard let imageURL = URL(string: url) else {
-            image = UIImage(systemName: "prohibit")
+            image = UIImage(systemName: "person.circle")?.withTintColor(.red, renderingMode: .alwaysOriginal)
             return
         }
         
         if let cachedImage = getCacheImage(from: imageURL) {
-            print("cachedImage \(imageURL)")
+            //print("cachedImage \(imageURL)")
             image = cachedImage
             return
         }
         
-        print("fetchImage \(imageURL)")
+        //print("fetchImage \(imageURL)")
         NetworkManager.shared.fetchImage(from: imageURL) { data, response in
             DispatchQueue.main.async {
                 self.image = UIImage(data: data)
@@ -30,6 +31,8 @@ class CharacterImageView: UIImageView {
         }
     }
     
+    //MARK: - private func
+    //MARK: - getCacheImage()
     private func getCacheImage(from url: URL) -> UIImage? {
         let urlRequest = URLRequest(url: url)
         if let cachedResponse = URLCache.shared.cachedResponse(for: urlRequest) {
@@ -39,6 +42,7 @@ class CharacterImageView: UIImageView {
         return nil
     }
     
+    //MARK: - saveDataToCache()
     private func saveDataToCache(with data: Data, and response: URLResponse) {
         guard let url = response.url else { return }
         let urlRequest = URLRequest(url: url)

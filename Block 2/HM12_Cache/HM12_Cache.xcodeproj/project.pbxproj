@@ -17,6 +17,7 @@
 		73E680D525BEC82E00A22EC2 /* CharacterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E680D425BEC82E00A22EC2 /* CharacterCell.swift */; };
 		73E680D925BEE30900A22EC2 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E680D825BEE30900A22EC2 /* NetworkManager.swift */; };
 		73E680DD25BF1CDF00A22EC2 /* CharacterImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E680DC25BF1CDF00A22EC2 /* CharacterImageView.swift */; };
+		73E680E625BF65C600A22EC2 /* DetailCharacterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E680E525BF65C600A22EC2 /* DetailCharacterViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		73E680D425BEC82E00A22EC2 /* CharacterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCell.swift; sourceTree = "<group>"; };
 		73E680D825BEE30900A22EC2 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		73E680DC25BF1CDF00A22EC2 /* CharacterImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterImageView.swift; sourceTree = "<group>"; };
+		73E680E525BF65C600A22EC2 /* DetailCharacterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DetailCharacterViewController.swift; path = "HM12_Cache/View Controllers/DetailCharacterViewController.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				73E680B225BDE8FC00A22EC2 /* MainViewController.swift */,
+				73E680E525BF65C600A22EC2 /* DetailCharacterViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -194,6 +197,7 @@
 				73E680B325BDE8FC00A22EC2 /* MainViewController.swift in Sources */,
 				73E680CD25BE173500A22EC2 /* CharacterModal.swift in Sources */,
 				73E680AF25BDE8FC00A22EC2 /* AppDelegate.swift in Sources */,
+				73E680E625BF65C600A22EC2 /* DetailCharacterViewController.swift in Sources */,
 				73E680B125BDE8FC00A22EC2 /* SceneDelegate.swift in Sources */,
 				73E680DD25BF1CDF00A22EC2 /* CharacterImageView.swift in Sources */,
 			);
