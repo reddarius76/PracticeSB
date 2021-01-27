@@ -11,6 +11,16 @@ class MainViewController: UITableViewController {
     
     // MARK: - Private properties
     private var countCharacters: Int?
+    private let searchController = UISearchController(searchResultsController: nil)
+    private var characterInfo: CharacterInfo?
+    private var filteredChracter = [Result]()
+    private var searchBarIsEmpty: Bool {
+        guard let text = searchController.searchBar.text else { return false }
+        return text.isEmpty
+    }
+    private var isFiltering: Bool {
+        return searchController.isActive && !searchBarIsEmpty
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,10 +29,12 @@ class MainViewController: UITableViewController {
         URLCache.shared.diskCapacity = 52428800
         //URLCache.shared.removeAllCachedResponses()
         
-        NetworkManager.shared.fetchInfoCharacter(from: urlAPI.urlCharacter.rawValue) { infoCharacter in
+        NetworkManager.shared.fetchInfoCharacter(from: urlAPI.urlCharacter.rawValue) { [self] infoCharacter in
             self.countCharacters = infoCharacter.info?.count
             self.tableView.reloadData()
         }
+        
+        setupSearchController()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -35,6 +47,7 @@ class MainViewController: UITableViewController {
 
 // MARK: - Table view data source
 extension MainViewController {
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return countCharacters ?? 0
     }
@@ -46,18 +59,30 @@ extension MainViewController {
         NetworkManager.shared.fetchCharacter(from: urlAPI.urlCharacter.rawValue + String(index + 1)) { character in
             cell.configureCell(with: character)
         }
-        
-//        let infoCacheUsage = """
-//            index: \(index + 1)
-//            currentDiskUsage: \(URLCache.shared.currentDiskUsage / 1024) kb
-//            currentMemoryUsage: \(URLCache.shared.currentMemoryUsage / 1024) kb
-//            diskCapacity: \(URLCache.shared.diskCapacity / 1024) kb
-//            memoryCapacity: \(URLCache.shared.memoryCapacity / 1024) kb
-//            ---------------
-//        """
-//        print(infoCacheUsage)
-            
+                    
         return cell
+    }
+}
+
+
+//MARK: - UISearchResults
+extension MainViewController: UISearchResultsUpdating {
+    
+    private func setupSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search"
+        searchController.searchBar.barTintColor = .white
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+        
+        if let textField = searchController.searchBar.value(forKey: "searchField") as? UITextField {
+            textField.font = UIFont.boldSystemFont(ofSize: 17)
+            textField.textColor = .label
+        }
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
     }
 }
 

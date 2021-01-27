@@ -23,6 +23,11 @@ class CharacterCell: UITableViewCell {
         characterNameLable.text = result?.name ?? ""
         characterImage.fetchImageCharacter(from: result?.image ?? "")
     }
+    
+    func configureCell1(with result: Result?) {
+        characterNameLable.text = result?.name ?? ""
+        characterImage.fetchImageCharacter(from: result?.image ?? "")
+    }
 }
 
 

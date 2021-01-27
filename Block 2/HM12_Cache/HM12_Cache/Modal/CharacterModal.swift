@@ -24,9 +24,9 @@ struct Result: Decodable {
     let id: Int?
     let name: String?
     let status: Status?
-    let species: Species?
+    let species: String?
     let type: String?
-    let gender: Gender?
+    let gender: String?
     let origin, location: Location?
     let image: String?
     let episode: [String]?
@@ -35,11 +35,11 @@ struct Result: Decodable {
 }
 
 // MARK: - Gender
-enum Gender: String, Decodable {
-    case female = "Female"
-    case male = "Male"
-    case unknown = "unknown"
-}
+//enum Gender: String, Decodable {
+//    case female = "Female"
+//    case male = "Male"
+//    case unknown = "unknown"
+//}
 
 // MARK: - Location
 struct Location: Decodable {
@@ -47,11 +47,11 @@ struct Location: Decodable {
     let url: String?
 }
 
-// MARK: - Species
-enum Species: String, Decodable {
-    case alien = "Alien"
-    case human = "Human"
-}
+//// MARK: - Species
+//enum Species: String, Decodable {
+//    case alien = "Alien"
+//    case human = "Human"
+//}
 
 // MARK: - Status
 enum Status: String, Decodable {

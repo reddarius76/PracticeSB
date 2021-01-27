@@ -17,12 +17,10 @@ class CharacterImageView: UIImageView {
         }
         
         if let cachedImage = getCacheImage(from: imageURL) {
-            //print("cachedImage \(imageURL)")
             image = cachedImage
             return
         }
         
-        //print("fetchImage \(imageURL)")
         NetworkManager.shared.fetchImage(from: imageURL) { data, response in
             DispatchQueue.main.async {
                 self.image = UIImage(data: data)
