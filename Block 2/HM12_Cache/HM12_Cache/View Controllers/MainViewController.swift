@@ -10,10 +10,20 @@ import UIKit
 class MainViewController: UITableViewController {
     
     // MARK: - Private properties
-    private var countCharacters: Int?
+    private var countPages: Int?
+    private var currentPage = 1
+    private var cellStep = 20
+    private var characters = [Result?]()
+    private var dataTasks = [URLSessionDataTask?]()
+
+    private var searchName: String?
+    private var countPagesSearch: Int?
+    private var currentPageSearch = 1
+    private var cellStepSearch = 20
+    private var charactersSearch = [Result?]()
+    private var dataTasksSearch = [URLSessionDataTask?]()
+    
     private let searchController = UISearchController(searchResultsController: nil)
-    private var characterInfo: CharacterInfo?
-    private var filteredChracter = [Result]()
     private var searchBarIsEmpty: Bool {
         guard let text = searchController.searchBar.text else { return false }
         return text.isEmpty
@@ -29,19 +39,84 @@ class MainViewController: UITableViewController {
         URLCache.shared.diskCapacity = 52428800
         //URLCache.shared.removeAllCachedResponses()
         
-        NetworkManager.shared.fetchInfoCharacter(from: urlAPI.urlCharacter.rawValue) { [self] infoCharacter in
-            self.countCharacters = infoCharacter.info?.count
-            self.tableView.reloadData()
+        let dataTaskFromFirstPage = NetworkManager.shared.fetchCharacter(url: urlAPI.urlCharacter.rawValue, page: currentPage, dataTasks: dataTasks) { [self] infoCharacter in
+            
+            guard let results = infoCharacter?.results else { return }
+            countPages = infoCharacter?.info?.pages
+            characters.append(contentsOf: results)
+            currentPage = currentPage + 1
+            tableView.reloadData()
         }
-        
+        dataTasks.append(dataTaskFromFirstPage)
         setupSearchController()
     }
     
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let indexPath = tableView.indexPathForSelectedRow else { return }
-        let characterID = indexPath.row + 1
+        let index = indexPath.row
         let detailCharacterVC = segue.destination as! DetailCharacterViewController
-        detailCharacterVC.characterID = characterID
+        detailCharacterVC.characterID = isFiltering ? charactersSearch[index] : characters[index]
+    }
+    
+    private func prefetchCharactersFromNextPages() {
+        if currentPage - 1 == countPages { return }
+
+        let dataTaskFromPage = NetworkManager.shared.fetchCharacter(url: urlAPI.urlCharacter.rawValue, page: currentPage, dataTasks: dataTasks) { [self] infoCharacter in
+            
+            guard let results = infoCharacter?.results else { return }
+            
+            var indexPathsOptional = [IndexPath?]()
+            characters.append(contentsOf: results)
+            currentPage = currentPage + 1
+            
+            for index in results {
+                indexPathsOptional.append(IndexPath(row: (index.id!) - 1, section: 0))
+            }
+            
+            let indexPaths = indexPathsOptional.compactMap { $0 }
+            tableView.performBatchUpdates {
+                tableView.insertRows(at: indexPaths, with: .automatic)
+            }
+        }
+        dataTasks.append(dataTaskFromPage)
+    }
+    
+    private func prefetchForSearchCharactersFromNextPages(searchText: String) {
+        if currentPageSearch - 1 == countPagesSearch { return }
+
+        let dataTaskFromPage = NetworkManager.shared.fetchCharacter(url: urlAPI.urlCharacter.rawValue, page: currentPageSearch, name: searchText, dataTasks: dataTasksSearch) { [self] infoCharacter in
+            
+            guard let results = infoCharacter?.results else { return }
+            
+            var indexPathsOptional = [IndexPath?]()
+            for (key, _) in results.enumerated() {
+                indexPathsOptional.append(IndexPath(row: charactersSearch.count + key, section: 0))
+            }
+            charactersSearch.append(contentsOf: results)
+            currentPageSearch = currentPageSearch + 1
+            
+            let indexPaths = indexPathsOptional.compactMap { $0 }
+            
+            tableView.performBatchUpdates {
+                tableView.insertRows(at: indexPaths, with: .automatic)
+            }
+        }
+        dataTasksSearch.append(dataTaskFromPage)
+    }
+    
+    private func updateStepForMainList(index: Int) {
+        if (index + 1) % cellStep == 0 {
+            prefetchCharactersFromNextPages()
+            cellStep = cellStep + 20
+        }
+    }
+    
+    private func updateStepForSearchList(index: Int) {
+        if (index + 1) % cellStepSearch == 0 {
+            prefetchForSearchCharactersFromNextPages(searchText: searchName!)
+            cellStepSearch = cellStepSearch + 20
+        }
     }
 }
 
@@ -49,17 +124,16 @@ class MainViewController: UITableViewController {
 extension MainViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return countCharacters ?? 0
+        return isFiltering ? charactersSearch.count : characters.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CharacterCell
         let index = indexPath.row
         
-        NetworkManager.shared.fetchCharacter(from: urlAPI.urlCharacter.rawValue + String(index + 1)) { character in
-            cell.configureCell(with: character)
-        }
-                    
+        let result = isFiltering ? charactersSearch[index] : characters[index]
+        cell.configureCell1(with: result)
+        isFiltering ? updateStepForSearchList(index: index) : updateStepForMainList(index: index)
         return cell
     }
 }
@@ -83,6 +157,33 @@ extension MainViewController: UISearchResultsUpdating {
     }
     
     func updateSearchResults(for searchController: UISearchController) {
+        searchName = searchController.searchBar.text
+        filterCharacterForSearchText(searchName!)
+    }
+    
+    private func clearSearch() {
+        countPagesSearch = nil
+        currentPageSearch = 1
+        cellStepSearch = 20
+        charactersSearch.removeAll()
+        dataTasksSearch.removeAll()
+        tableView.reloadData()
+    }
+    
+    private func filterCharacterForSearchText(_ searchText: String) {
+        clearSearch()
+        
+        if searchText == "" { return }
+        
+        let dataTaskFromFirstPageSearch = NetworkManager.shared.fetchCharacter(url: urlAPI.urlCharacter.rawValue, page: currentPageSearch, name: searchText, dataTasks: dataTasksSearch) { [self] infoCharacter in
+
+            guard let results = infoCharacter?.results else { return }
+            countPagesSearch = infoCharacter?.info?.pages
+            charactersSearch.append(contentsOf: results)
+            currentPageSearch = currentPageSearch + 1
+            tableView.reloadData()
+        }
+        dataTasksSearch.append(dataTaskFromFirstPageSearch)
     }
 }
 

@@ -11,14 +11,65 @@ class NetworkManager {
     static let shared = NetworkManager()
     
     //MARK: - fetchInfoCharacter()
-    func fetchInfoCharacter(from url: String, with comletion: @escaping (CharacterInfo) -> Void) {
-        guard let url = URL(string: url) else { return }
+//    func fetchInfoCharacter(url: String, page: Int, dataTasks: [URLSessionDataTask?], with comletion: @escaping (CharacterInfo) -> Void) -> URLSessionDataTask? {
+//
+//        let apiURL = url + "?page=\(page)"
+//        guard let url = URL(string: apiURL) else { return nil}
+//
+//        if dataTasks.firstIndex(where: { task in
+//            task?.originalRequest?.url == url
+//          }) != nil {
+//            return nil
+//        }
+//
+//        let dataTask = URLSession.shared.dataTask(with: url) { data, response, error in
+//            guard let data = data else {
+//                print(error?.localizedDescription ?? "no localized description")
+//                return
+//            }
+//
+//            guard url == response?.url else { return }
+//
+//            do {
+//                let result = try JSONDecoder().decode(CharacterInfo.self, from: data)
+//                DispatchQueue.main.async {
+//                    comletion(result)
+//                }
+//            } catch let error {
+//                print("fetchInfoCharacter JSONDecoder error: \(error)")
+//            }
+//        }
+//        dataTask.resume()
+//
+//        return dataTask
+//    }
+    
+    func fetchCharacter(url: String, page: Int, name: String? = nil, dataTasks: [URLSessionDataTask?], with comletion: @escaping (CharacterInfo?) -> Void) -> URLSessionDataTask? {
         
-        URLSession.shared.dataTask(with: url) { data, _, error in
+        var apiURLOptional: String?
+        if let name = name {
+            apiURLOptional = url + "?page=\(page)" + "&name=\(name)"
+        } else {
+            apiURLOptional = url + "?page=\(page)"
+        }
+        
+        guard let apiURL = apiURLOptional else { return nil }
+        guard let url = URL(string: apiURL) else { return nil }
+        
+        if dataTasks.firstIndex(where: { task in
+            task?.originalRequest?.url == url
+          }) != nil {
+            return nil
+        }
+        
+        let dataTask = URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data else {
                 print(error?.localizedDescription ?? "no localized description")
+                comletion(nil)
                 return
             }
+            
+            guard url == response?.url else { return }
             
             do {
                 let result = try JSONDecoder().decode(CharacterInfo.self, from: data)
@@ -28,31 +79,34 @@ class NetworkManager {
             } catch let error {
                 print("fetchInfoCharacter JSONDecoder error: \(error)")
             }
-        }.resume()
+        }
+        dataTask.resume()
+        
+        return dataTask
     }
     
     //MARK: - fetchCharacter()
-    func fetchCharacter(from url: String, with comletion: @escaping (Character) -> Void) {
-        guard let url = URL(string: url) else { return }
-        
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            guard let data = data, let response = response else {
-                print(error?.localizedDescription ?? "no localized description")
-                return
-            }
-            
-            guard url == response.url else { return }
-            
-            do {
-                let result = try JSONDecoder().decode(Character.self, from: data)
-                DispatchQueue.main.async {
-                    comletion(result)
-                }
-            } catch let error {
-                print("fetchCharacter JSONDecoder error: \(error)")
-            }
-        }.resume()
-    }
+//    func fetchCharacter1(from url: String, with comletion: @escaping (Character) -> Void) {
+//        guard let url = URL(string: url) else { return }
+//
+//        URLSession.shared.dataTask(with: url) { data, response, error in
+//            guard let data = data, let response = response else {
+//                print(error?.localizedDescription ?? "no localized description")
+//                return
+//            }
+//
+//            guard url == response.url else { return }
+//
+//            do {
+//                let result = try JSONDecoder().decode(Character.self, from: data)
+//                DispatchQueue.main.async {
+//                    comletion(result)
+//                }
+//            } catch let error {
+//                print("fetchCharacter JSONDecoder error: \(error)")
+//            }
+//        }.resume()
+//    }
     
     //MARK: - fetchImage()
     func fetchImage(from url: URL, with comletion: @escaping (Data, URLResponse) -> Void) {

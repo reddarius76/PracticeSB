@@ -32,6 +32,15 @@ struct Result: Decodable {
     let episode: [String]?
     let url: String?
     let created: String?
+    
+    var description: String {
+        """
+    Species: \(species ?? "unknown")
+    Gender: \(gender ?? "unknown")
+    Origin: \(origin?.name ?? "unknown")
+    Location: \(location?.name ?? "unknown")
+    """
+    }
 }
 
 // MARK: - Gender
@@ -71,15 +80,7 @@ struct Character: Decodable {
     let url: String?
     let created: String?
     
-    var description: String {
-        """
-    Status: \(status ?? "unknown")
-    Species: \(species ?? "unknown")
-    Gender: \(gender ?? "unknown")
-    Origin: \(origin?.name ?? "unknown")
-    Location: \(location?.name ?? "unknown")
-    """
-    }
+    
 }
 
 // MARK: - API URLs

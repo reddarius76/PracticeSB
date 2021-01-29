@@ -16,15 +16,13 @@ class DetailCharacterViewController: UIViewController {
     }
     @IBOutlet weak var descriptionCharacterLabel: UILabel!
     
-    var characterID: Int?
+    var characterID: Result?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NetworkManager.shared.fetchCharacter(from: urlAPI.urlCharacter.rawValue + String(characterID!)) { character in
-            self.characterImageView.fetchImageCharacter(from: character.image ?? "")
-            self.navigationController?.navigationBar.topItem?.title = character.name
-            self.descriptionCharacterLabel.text = character.description
-        }
+        characterImageView.fetchImageCharacter(from: characterID?.image ?? "")
+        title = characterID?.name
+        descriptionCharacterLabel.text = characterID?.description
     }
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		739A502425C3FCBD0021BE1A /* PrefetchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739A502325C3FCBD0021BE1A /* PrefetchViewController.swift */; };
 		73E680AF25BDE8FC00A22EC2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E680AE25BDE8FC00A22EC2 /* AppDelegate.swift */; };
 		73E680B125BDE8FC00A22EC2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E680B025BDE8FC00A22EC2 /* SceneDelegate.swift */; };
 		73E680B325BDE8FC00A22EC2 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E680B225BDE8FC00A22EC2 /* MainViewController.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		739A502325C3FCBD0021BE1A /* PrefetchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefetchViewController.swift; sourceTree = "<group>"; };
 		73E680AB25BDE8FC00A22EC2 /* HM12_Cache.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HM12_Cache.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73E680AE25BDE8FC00A22EC2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		73E680B025BDE8FC00A22EC2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				73E680B225BDE8FC00A22EC2 /* MainViewController.swift */,
+				739A502325C3FCBD0021BE1A /* PrefetchViewController.swift */,
 				73E680E525BF65C600A22EC2 /* DetailCharacterViewController.swift */,
 			);
 			path = "View Controllers";
@@ -196,6 +199,7 @@
 				73E680D525BEC82E00A22EC2 /* CharacterCell.swift in Sources */,
 				73E680B325BDE8FC00A22EC2 /* MainViewController.swift in Sources */,
 				73E680CD25BE173500A22EC2 /* CharacterModal.swift in Sources */,
+				739A502425C3FCBD0021BE1A /* PrefetchViewController.swift in Sources */,
 				73E680AF25BDE8FC00A22EC2 /* AppDelegate.swift in Sources */,
 				73E680E625BF65C600A22EC2 /* DetailCharacterViewController.swift in Sources */,
 				73E680B125BDE8FC00A22EC2 /* SceneDelegate.swift in Sources */,

@@ -65,7 +65,7 @@
             </objects>
             <point key="canvasLocation" x="1034.7826086956522" y="105.80357142857143"/>
         </scene>
-        <!--Detail Character View Controller-->
+        <!--t34-->
         <scene sceneID="Cth-lw-dMi">
             <objects>
                 <viewController id="eoe-Ix-B38" customClass="DetailCharacterViewController" customModule="HM12_Cache" customModuleProvider="target" sceneMemberID="viewController">
@@ -100,7 +100,7 @@
                             <constraint firstItem="wVe-Cd-em4" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Z8d-V0-EaI" secondAttribute="bottom" constant="214" id="zJx-b8-scA"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="S2h-am-UKu">
+                    <navigationItem key="navigationItem" title="t34" leftItemsSupplementBackButton="YES" largeTitleDisplayMode="always" id="S2h-am-UKu">
                         <barButtonItem key="backBarButtonItem" title="Back" id="nyG-G0-mID"/>
                     </navigationItem>
                     <connections>
