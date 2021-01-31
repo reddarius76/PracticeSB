@@ -19,7 +19,7 @@ class MainViewController: UITableViewController {
     private var searchName: String?
     private var countPagesSearch: Int?
     private var currentPageSearch = 1
-    private var cellStepSearch = 20
+    private var cellStepSearch = 15
     private var charactersSearch = [Result?]()
     private var dataTasksSearch = [URLSessionDataTask?]()
     
