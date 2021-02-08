@@ -28,7 +28,9 @@ class StorageDBManager {
             for newValue in newValues {
                 switch newValue.key {
                 case "name": task.name = newValue.value
-                case "isDone": task.isDone = Bool(newValue.value) ?? true
+                case "isDone":
+                    guard let value = Bool(newValue.value) else { return }
+                    task.isDone = value
                 default: break
                 }
             }
@@ -56,11 +58,12 @@ class StorageDBManager {
                 switch newValue.key {
                 case "name": subtask.name = newValue.value
                 case "note": subtask.note = newValue.value
-                case "isDone": subtask.isDone = Bool(newValue.value) ?? true
+                case "isDone":
+                    guard let value = Bool(newValue.value) else { return }
+                    subtask.isDone = value
                 default: break
                 }
             }
-            
         }
     }
     

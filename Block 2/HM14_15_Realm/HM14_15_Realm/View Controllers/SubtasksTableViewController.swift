@@ -66,14 +66,14 @@ extension SubtasksTableViewController {
         let subtask = currentSubtasks[indexPath.row]
         
         //MARK: - Swipe Done subtask
-        let doneDone = UIContextualAction(style: .destructive,
-                                           title: "Done") { (action, view, success) in
+        let doneAction = UIContextualAction(style: .destructive,
+                                           title: "Done") { (_, _, _) in
             StorageDBManager.shared.edit(subtask: subtask, newValues: ["isDone": "true"])
             let newIndexPath = IndexPath(row: self.completedSubtasks.count - 1, section: 1)
             tableView.moveRow(at: indexPath, to: newIndexPath)
         }
-        doneDone.backgroundColor = #colorLiteral(red: 0.3215686275, green: 0.768627451, blue: 0.1019607843, alpha: 1)
-        return UISwipeActionsConfiguration(actions: [doneDone])
+        doneAction.backgroundColor = #colorLiteral(red: 0.3215686275, green: 0.768627451, blue: 0.1019607843, alpha: 1)
+        return UISwipeActionsConfiguration(actions: [doneAction])
     }
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -81,16 +81,17 @@ extension SubtasksTableViewController {
         
         //MARK: - Swipe Edit subtask
         let editAction = UIContextualAction(style: .normal,
-                                           title: "Edit") { (action, view, success) in
+                                           title: "Edit") { (_, _, success) in
             self.showAlert(subtask: subtask) {
                 tableView.reloadRows(at: [indexPath], with: .automatic)
             }
+            success(true)
         }
         editAction.backgroundColor = #colorLiteral(red: 0, green: 0.5751428604, blue: 1, alpha: 1)
         
         //MARK: - Swipe Delete subtask
         let deleteAction = UIContextualAction(style: .destructive,
-                                             title: "Delete") { (action, view, success) in
+                                             title: "Delete") { (_, _, _) in
             StorageDBManager.shared.delete(subtask: subtask)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }

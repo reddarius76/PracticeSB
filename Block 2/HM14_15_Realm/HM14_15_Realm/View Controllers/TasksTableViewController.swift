@@ -68,7 +68,7 @@ extension TasksTableViewController {
         
         //MARK: - Swipe Done task
         let doneAction = UIContextualAction(style: .destructive,
-                                           title: "Done") { (action, view, success) in
+                                           title: "Done") { (_, _, _) in
             StorageDBManager.shared.edit(task: task, newValues: ["isDone": "true"])
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
@@ -81,16 +81,17 @@ extension TasksTableViewController {
         
         //MARK: - Swipe Edit task
         let editAction = UIContextualAction(style: .normal,
-                                           title: "Edit") { (action, view, success) in
+                                           title: "Edit") { (_, _, success) in
             self.showAlert(task: task) {
                 tableView.reloadRows(at: [indexPath], with: .automatic)
             }
+            success(true)
         }
         editAction.backgroundColor = #colorLiteral(red: 0, green: 0.5751428604, blue: 1, alpha: 1)
         
         //MARK: - Swipe Delete task
         let deleteAction = UIContextualAction(style: .destructive,
-                                             title: "Delete") { (action, view, success) in
+                                             title: "Delete") { (_, _, _) in
             StorageDBManager.shared.delete(task: task)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
