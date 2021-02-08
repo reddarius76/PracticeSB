@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		73741F6025D036D700F17A41 /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73741F5F25D036D700F17A41 /* AlertController.swift */; };
 		7385F60E25CEDAA0006637D7 /* TasksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7385F60D25CEDAA0006637D7 /* TasksTableViewController.swift */; };
 		7385F61225CEDDFA006637D7 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7385F61125CEDDFA006637D7 /* Task.swift */; };
 		7385F61825CEE38B006637D7 /* StorageDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7385F61725CEE38B006637D7 /* StorageDBManager.swift */; };
@@ -21,6 +22,7 @@
 
 /* Begin PBXFileReference section */
 		11C80CDC8226112FF8DCF071 /* Pods-HM14_15_Realm.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HM14_15_Realm.release.xcconfig"; path = "Target Support Files/Pods-HM14_15_Realm/Pods-HM14_15_Realm.release.xcconfig"; sourceTree = "<group>"; };
+		73741F5F25D036D700F17A41 /* AlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
 		7385F60D25CEDAA0006637D7 /* TasksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksTableViewController.swift; sourceTree = "<group>"; };
 		7385F61125CEDDFA006637D7 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		7385F61725CEE38B006637D7 /* StorageDBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageDBManager.swift; sourceTree = "<group>"; };
@@ -86,6 +88,14 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
+		73741F6425D036DE00F17A41 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				73741F5F25D036D700F17A41 /* AlertController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		7385F61425CEDDFD006637D7 /* Modal */ = {
 			isa = PBXGroup;
 			children = (
@@ -115,10 +125,11 @@
 		738F5A0025CED55A00E69A80 /* HM14_15_Realm */ = {
 			isa = PBXGroup;
 			children = (
-				732E0DBE25CED6AA009EA8B3 /* Supporting files */,
+				73741F6425D036DE00F17A41 /* Views */,
 				732E0DC125CED6B5009EA8B3 /* View Controllers */,
-				732E0DC425CED6C8009EA8B3 /* Storyboards */,
 				7385F61425CEDDFD006637D7 /* Modal */,
+				732E0DC425CED6C8009EA8B3 /* Storyboards */,
+				732E0DBE25CED6AA009EA8B3 /* Supporting files */,
 				7385F61725CEE38B006637D7 /* StorageDBManager.swift */,
 			);
 			path = HM14_15_Realm;
@@ -250,6 +261,7 @@
 				7385F61C25CEEF25006637D7 /* SubtasksTableViewController.swift in Sources */,
 				738F5A0225CED55A00E69A80 /* AppDelegate.swift in Sources */,
 				7385F61825CEE38B006637D7 /* StorageDBManager.swift in Sources */,
+				73741F6025D036D700F17A41 /* AlertController.swift in Sources */,
 				7385F61225CEDDFA006637D7 /* Task.swift in Sources */,
 				738F5A0425CED55A00E69A80 /* SceneDelegate.swift in Sources */,
 			);

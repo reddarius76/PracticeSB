@@ -9,52 +9,84 @@ import RealmSwift
 
 class StorageDBManager {
     static let shared = StorageDBManager()
-    private var database: Realm?
+    private let database = try! Realm()
     
-    func addData(object: Task) {
-        guard let database = database else { return }
-        do {
-            try database.write {
-                database.add(object, update: .all)
-            }
-        } catch let error {
-            print("Error addData to DB: \(error.localizedDescription)")
+    // MARK: - Task methods
+    func add(task: Task) {
+        write {
+            database.add(task)
         }
     }
     
-    func getData() -> Results<Task>? {
-        guard let database = database else { return nil}
+    func getData() -> Results<Task> {
         let results = database.objects(Task.self)
         return results
     }
     
-    func deleteData(object: Task) {
-        guard let database = database else { return }
-        do {
-            try database.write {
-                database.delete(object)
+    func edit(task: Task, newValues: [String: String]) {
+        write {
+            for newValue in newValues {
+                switch newValue.key {
+                case "name": task.name = newValue.value
+                case "isDone": task.isDone = Bool(newValue.value) ?? true
+                default: break
+                }
             }
-        } catch let error {
-            print("Error deleteData: \(error.localizedDescription)")
         }
     }
     
+    func delete(task: Task) {
+        write {
+            let subtask = task.subtasks
+            database.delete(subtask)
+            database.delete(task)
+        }
+    }
+    
+    // MARK: - Subtask methods
+    func add(subtask: Subtask, in task: Task) {
+        write {
+            task.subtasks.append(subtask)
+        }
+    }
+    
+    func edit(subtask: Subtask, newValues: [String: String]) {
+        write {
+            for newValue in newValues {
+                switch newValue.key {
+                case "name": subtask.name = newValue.value
+                case "note": subtask.note = newValue.value
+                case "isDone": subtask.isDone = Bool(newValue.value) ?? true
+                default: break
+                }
+            }
+            
+        }
+    }
+    
+    func delete(subtask: Subtask) {
+        write {
+            database.delete(subtask)
+        }
+    }
+    
+    
+    // MARK: - Another methods
     func deletaAll() {
-        guard let database = database else { return }
-        do {
-            try database.write {
-                database.deleteAll()
-            }
-        } catch let error {
-            print("Error deleteAll: \(error.localizedDescription)")
+        write {
+            database.deleteAll()
         }
     }
     
-    private init() {
+    private func write(_ completion: () -> Void) {
         do {
-            database = try Realm()
+            try database.write {
+                completion()
+            }
         } catch let error {
-            print("Error open DB: \(error.localizedDescription)")
+            print(error)
         }
     }
+    
+    private init() {}
 }

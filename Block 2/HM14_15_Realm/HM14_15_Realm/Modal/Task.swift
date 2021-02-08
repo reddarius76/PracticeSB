@@ -11,13 +11,12 @@ class Subtask: Object {
     @objc dynamic var name = ""
     @objc dynamic var note = ""
     @objc dynamic var isDone = false
-    //@objc dynamic var dateCreated = Date()
+    @objc dynamic var dateCreated = Date()
 }
 
 class Task: Object {
     @objc dynamic var name = ""
     @objc dynamic var isDone = false
-    //@objc dynamic var dateCreated = Date()
-    
+    @objc dynamic var dateCreated = Date()
     let subtasks = List<Subtask>()
 }

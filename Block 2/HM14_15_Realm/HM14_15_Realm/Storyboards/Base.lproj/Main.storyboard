@@ -16,12 +16,28 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellTask" id="82O-Tp-kld">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellTask" textLabel="lcL-Gq-xeT" detailTextLabel="KIW-FD-ldd" style="IBUITableViewCellStyleValue1" id="82O-Tp-kld">
                                 <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="82O-Tp-kld" id="gEn-dN-MXq">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lcL-Gq-xeT">
+                                            <rect key="frame" x="20" y="12" width="33" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KIW-FD-ldd">
+                                            <rect key="frame" x="350" y="12" width="44" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                                 <connections>
                                     <segue destination="d0q-Yt-9g5" kind="show" id="MbL-YE-UGG"/>
@@ -33,15 +49,13 @@
                             <outlet property="delegate" destination="rTJ-J7-7xG" id="fIw-G0-6ck"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Tasks Manager" largeTitleDisplayMode="always" id="c5f-Bx-6i3">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="YSf-ow-lT0"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Tasks Manager" largeTitleDisplayMode="always" id="c5f-Bx-6i3"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r6q-cJ-d5B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="436" y="59"/>
         </scene>
-        <!--Test-->
+        <!--Task-->
         <scene sceneID="DhF-75-KWT">
             <objects>
                 <tableViewController id="d0q-Yt-9g5" customClass="SubtasksTableViewController" customModule="HM14_15_Realm" customModuleProvider="target" sceneMemberID="viewController">
@@ -50,7 +64,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellSubtask" textLabel="ndl-Rh-oRM" detailTextLabel="BZ8-GJ-mmf" style="IBUITableViewCellStyleSubtitle" id="nz9-JI-pqR">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cellSubtask" textLabel="ndl-Rh-oRM" detailTextLabel="BZ8-GJ-mmf" style="IBUITableViewCellStyleSubtitle" id="nz9-JI-pqR">
                                 <rect key="frame" x="0.0" y="28" width="414" height="55.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nz9-JI-pqR" id="WVo-xW-sCk">
@@ -80,7 +94,7 @@
                             <outlet property="delegate" destination="d0q-Yt-9g5" id="xOh-9I-37b"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Test" largeTitleDisplayMode="always" id="LI4-d3-pnF"/>
+                    <navigationItem key="navigationItem" title="Task" largeTitleDisplayMode="always" id="LI4-d3-pnF"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="olx-Wx-AIO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

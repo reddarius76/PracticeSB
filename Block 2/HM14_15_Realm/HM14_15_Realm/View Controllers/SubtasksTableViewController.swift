@@ -21,6 +21,15 @@ class SubtasksTableViewController: UITableViewController {
         
         currentSubtasks = task.subtasks.filter("isDone = false")
         completedSubtasks = task.subtasks.filter("isDone = true")
+        
+        let addSubtask = UIBarButtonItem(barButtonSystemItem: .add,
+                                      target: self,
+                                      action: #selector(addSubtaskPressed))
+        navigationItem.rightBarButtonItem = addSubtask
+    }
+    
+    @objc func addSubtaskPressed() {
+        showAlert()
     }
 }
 
@@ -54,26 +63,72 @@ extension SubtasksTableViewController {
 extension SubtasksTableViewController {
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         if indexPath.section == 1 { return nil }
-        let swipeDone = UIContextualAction(style: .destructive,
+        let subtask = currentSubtasks[indexPath.row]
+        
+        //MARK: - Swipe Done subtask
+        let doneDone = UIContextualAction(style: .destructive,
                                            title: "Done") { (action, view, success) in
+            StorageDBManager.shared.edit(subtask: subtask, newValues: ["isDone": "true"])
+            let newIndexPath = IndexPath(row: self.completedSubtasks.count - 1, section: 1)
+            tableView.moveRow(at: indexPath, to: newIndexPath)
         }
-        swipeDone.backgroundColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
-        return UISwipeActionsConfiguration(actions: [swipeDone])
+        doneDone.backgroundColor = #colorLiteral(red: 0.3215686275, green: 0.768627451, blue: 0.1019607843, alpha: 1)
+        return UISwipeActionsConfiguration(actions: [doneDone])
     }
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let swipeEdit = UIContextualAction(style: .normal,
+        let subtask = indexPath.section == 0 ? currentSubtasks[indexPath.row] : completedSubtasks[indexPath.row]
+        
+        //MARK: - Swipe Edit subtask
+        let editAction = UIContextualAction(style: .normal,
                                            title: "Edit") { (action, view, success) in
+            self.showAlert(subtask: subtask) {
+                tableView.reloadRows(at: [indexPath], with: .automatic)
+            }
         }
-        swipeEdit.backgroundColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
+        editAction.backgroundColor = #colorLiteral(red: 0, green: 0.5751428604, blue: 1, alpha: 1)
         
-        let swipeDelete = UIContextualAction(style: .destructive,
+        //MARK: - Swipe Delete subtask
+        let deleteAction = UIContextualAction(style: .destructive,
                                              title: "Delete") { (action, view, success) in
+            StorageDBManager.shared.delete(subtask: subtask)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
         }
-        swipeDelete.backgroundColor = #colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1)
+        deleteAction.backgroundColor = #colorLiteral(red: 1, green: 0.3019607843, blue: 0.3098039216, alpha: 1)
         
-        let conf = UISwipeActionsConfiguration (actions: [swipeDelete, swipeEdit])
+        let conf = UISwipeActionsConfiguration (actions: [deleteAction, editAction])
         conf.performsFirstActionWithFullSwipe = false
         return conf
+    }
+}
+
+extension SubtasksTableViewController {
+    private func showAlert(subtask: Subtask? = nil, completion: (() -> Void)? = nil) {
+        
+        let title = subtask != nil ? "Update subtask" : "New subtask"
+        
+        let alert = AlertController(
+            title: title,
+            message: "What do you want to do?",
+            preferredStyle: .alert
+        )
+        
+        alert.action(for: subtask) { name, note in
+            //MARK: - Edit subtask
+            if let subtask = subtask, let completion = completion  {
+                let subtaskData = ["name": name, "note": note]
+                StorageDBManager.shared.edit(subtask: subtask, newValues: subtaskData)
+                completion()
+            } else {
+                //MARK: - Add new subtask
+                let subtask = Subtask()
+                subtask.name = name
+                subtask.note = note
+                StorageDBManager.shared.add(subtask: subtask, in: self.task)
+                let rowIndex = IndexPath(row: self.currentSubtasks.count - 1, section: 0)
+                self.tableView.insertRows(at: [rowIndex], with: .automatic)
+            }
+        }
+        present(alert, animated: true)
     }
 }
