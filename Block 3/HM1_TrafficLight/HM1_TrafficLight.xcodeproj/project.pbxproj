@@ -11,7 +11,8 @@
 		737213F225D80F0D006E9DE1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737213F125D80F0D006E9DE1 /* ContentView.swift */; };
 		737213F425D80F0E006E9DE1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 737213F325D80F0E006E9DE1 /* Assets.xcassets */; };
 		737213F725D80F0E006E9DE1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 737213F625D80F0E006E9DE1 /* Preview Assets.xcassets */; };
-		7372140025D81091006E9DE1 /* Light.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737213FF25D81091006E9DE1 /* Light.swift */; };
+		7372140025D81091006E9DE1 /* LightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737213FF25D81091006E9DE1 /* LightView.swift */; };
+		738D0FA725D83B1B0007BA1E /* ChangeLightButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738D0FA625D83B1B0007BA1E /* ChangeLightButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,7 +22,8 @@
 		737213F325D80F0E006E9DE1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		737213F625D80F0E006E9DE1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		737213F825D80F0E006E9DE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		737213FF25D81091006E9DE1 /* Light.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Light.swift; sourceTree = "<group>"; };
+		737213FF25D81091006E9DE1 /* LightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightView.swift; sourceTree = "<group>"; };
+		738D0FA625D83B1B0007BA1E /* ChangeLightButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeLightButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +58,7 @@
 			children = (
 				737213EF25D80F0D006E9DE1 /* HM1_TrafficLightApp.swift */,
 				737213F125D80F0D006E9DE1 /* ContentView.swift */,
-				737213FF25D81091006E9DE1 /* Light.swift */,
+				738D0FA925D83D670007BA1E /* Components */,
 				737213F325D80F0E006E9DE1 /* Assets.xcassets */,
 				737213F825D80F0E006E9DE1 /* Info.plist */,
 				737213F525D80F0E006E9DE1 /* Preview Content */,
@@ -70,6 +72,15 @@
 				737213F625D80F0E006E9DE1 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		738D0FA925D83D670007BA1E /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				737213FF25D81091006E9DE1 /* LightView.swift */,
+				738D0FA625D83B1B0007BA1E /* ChangeLightButton.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,7 +152,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7372140025D81091006E9DE1 /* Light.swift in Sources */,
+				738D0FA725D83B1B0007BA1E /* ChangeLightButton.swift in Sources */,
+				7372140025D81091006E9DE1 /* LightView.swift in Sources */,
 				737213F225D80F0D006E9DE1 /* ContentView.swift in Sources */,
 				737213F025D80F0D006E9DE1 /* HM1_TrafficLightApp.swift in Sources */,
 			);

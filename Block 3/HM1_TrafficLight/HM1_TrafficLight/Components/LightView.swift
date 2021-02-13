@@ -7,20 +7,22 @@
 
 import SwiftUI
 
-struct Light: View {
-    let color: UIColor
-    var alpha: CGFloat
+struct LightView: View {
+    let color: Color
+    let opacity: Double
+    
     var body: some View {
-        Color(color.withAlphaComponent(alpha))
+        Circle()
             .frame(width: 150, height: 150)
+            .foregroundColor(color)
+            .opacity(opacity)
             .clipShape(Circle())
-            .overlay(Circle().stroke())
     }
 }
 
 struct Light_Previews: PreviewProvider {
     static var previews: some View {
-        Light(color: .yellow, alpha: 1)
+        LightView(color: .black, opacity: 1)
     }
 }
 
