@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7374AED625DA46B20045C48E /* ColorPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7374AED525DA46B20045C48E /* ColorPanel.swift */; };
+		7374AED925DA47190045C48E /* ColorSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7374AED825DA47190045C48E /* ColorSlider.swift */; };
+		7374AEDC25DA55A30045C48E /* TextColorSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7374AEDB25DA55A30045C48E /* TextColorSlider.swift */; };
+		7374AEDF25DA56770045C48E /* TextFieldColorSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7374AEDE25DA56770045C48E /* TextFieldColorSlider.swift */; };
 		73CBA8A125D97F5200906662 /* HM2_ColorPanelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CBA8A025D97F5200906662 /* HM2_ColorPanelApp.swift */; };
 		73CBA8A325D97F5200906662 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CBA8A225D97F5200906662 /* ContentView.swift */; };
 		73CBA8A525D97F5400906662 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73CBA8A425D97F5400906662 /* Assets.xcassets */; };
@@ -14,6 +18,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7374AED525DA46B20045C48E /* ColorPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPanel.swift; sourceTree = "<group>"; };
+		7374AED825DA47190045C48E /* ColorSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSlider.swift; sourceTree = "<group>"; };
+		7374AEDB25DA55A30045C48E /* TextColorSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextColorSlider.swift; sourceTree = "<group>"; };
+		7374AEDE25DA56770045C48E /* TextFieldColorSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldColorSlider.swift; sourceTree = "<group>"; };
 		73CBA89D25D97F5200906662 /* HM2_ColorPanel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HM2_ColorPanel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73CBA8A025D97F5200906662 /* HM2_ColorPanelApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HM2_ColorPanelApp.swift; sourceTree = "<group>"; };
 		73CBA8A225D97F5200906662 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -33,6 +41,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7374AEE125DA577E0045C48E /* ColorSliderComponent */ = {
+			isa = PBXGroup;
+			children = (
+				7374AED825DA47190045C48E /* ColorSlider.swift */,
+				7374AEDE25DA56770045C48E /* TextFieldColorSlider.swift */,
+				7374AEDB25DA55A30045C48E /* TextColorSlider.swift */,
+			);
+			name = ColorSliderComponent;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		7374AEE225DA57A00045C48E /* ColorPanelComponent */ = {
+			isa = PBXGroup;
+			children = (
+				7374AED525DA46B20045C48E /* ColorPanel.swift */,
+			);
+			path = ColorPanelComponent;
+			sourceTree = "<group>";
+		};
+		7374AEE425DA57B60045C48E /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				7374AEE125DA577E0045C48E /* ColorSliderComponent */,
+				7374AEE225DA57A00045C48E /* ColorPanelComponent */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		73CBA89425D97F5200906662 = {
 			isa = PBXGroup;
 			children = (
@@ -54,6 +90,7 @@
 			children = (
 				73CBA8A025D97F5200906662 /* HM2_ColorPanelApp.swift */,
 				73CBA8A225D97F5200906662 /* ContentView.swift */,
+				7374AEE425DA57B60045C48E /* Components */,
 				73CBA8A425D97F5400906662 /* Assets.xcassets */,
 				73CBA8A925D97F5400906662 /* Info.plist */,
 				73CBA8A625D97F5400906662 /* Preview Content */,
@@ -138,7 +175,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7374AEDC25DA55A30045C48E /* TextColorSlider.swift in Sources */,
+				7374AED625DA46B20045C48E /* ColorPanel.swift in Sources */,
+				7374AEDF25DA56770045C48E /* TextFieldColorSlider.swift in Sources */,
 				73CBA8A325D97F5200906662 /* ContentView.swift in Sources */,
+				7374AED925DA47190045C48E /* ColorSlider.swift in Sources */,
 				73CBA8A125D97F5200906662 /* HM2_ColorPanelApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
