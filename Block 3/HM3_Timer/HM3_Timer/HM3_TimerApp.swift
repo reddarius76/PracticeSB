@@ -9,10 +9,12 @@ import SwiftUI
 
 @main
 struct HM3_TimerApp: App {
+    private let user = StorageManager.shared.fetchUserSettings()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(UserManager())
+                .environmentObject(UserManager(user: user))
         }
     }
 }

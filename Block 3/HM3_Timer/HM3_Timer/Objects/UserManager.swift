@@ -8,12 +8,22 @@
 import Combine
 
 class UserManager: ObservableObject {
-    @Published var isLogin = false
-    var name = ""
+    @Published var user = User()
     
     func checkUserSettings() {
         let userSettings = StorageManager.shared.fetchUserSettings()
-        self.isLogin = userSettings.islogin
-        self.name = userSettings.name
+        self.user.islogin = userSettings.islogin
+        self.user.name = userSettings.name
     }
+    
+    init() {}
+    
+    init(user: User) {
+        self.user = user
+    }
+}
+
+struct User: Codable {
+    var islogin = false
+    var name = ""
 }

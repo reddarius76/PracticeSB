@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ButtonLogin: View {
-    @EnvironmentObject var user: UserManager
+    @EnvironmentObject var userManager: UserManager
     @Binding var valueName: String
     @Binding var isDisabled: Bool
     
@@ -29,9 +29,9 @@ struct ButtonLogin: View {
 extension ButtonLogin {
     private func loginAction() {
         if !valueName.isEmpty && valueName.count > 2 {
-            let newUser = UserSetting(islogin: true, name: valueName)
+            let newUser = User(islogin: true, name: valueName)
             StorageManager.shared.save(userSetting: newUser)
-            user.checkUserSettings()
+            userManager.checkUserSettings()
         }
     }
 }

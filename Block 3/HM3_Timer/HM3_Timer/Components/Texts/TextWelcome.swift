@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct TextWelcome: View {
-    @EnvironmentObject var user: UserManager
+    @EnvironmentObject var userManager: UserManager
     
     var body: some View {
-        Text("Hi! \(user.name)")
+        Text("Hi! \(userManager.user.name)")
             .frame(width: 350, height: 40)
             .font(.largeTitle)
     }

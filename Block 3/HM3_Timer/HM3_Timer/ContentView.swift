@@ -8,16 +8,25 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var user: UserManager
+    @EnvironmentObject var userManager: UserManager
     
     var body: some View {
         Group {
-            if user.isLogin {
+            if userManager.user.islogin {
                 TimerView()
             } else {
                 AuthView()
+                    .onTapGesture {
+                        UIApplication.shared.endEditing()
+                    }
             }
-        }.onAppear(perform: { user.checkUserSettings() })
+        }
+    }
+}
+
+extension UIApplication {
+    func endEditing() {
+        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
 

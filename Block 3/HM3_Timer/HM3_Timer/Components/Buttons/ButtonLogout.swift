@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ButtonLogout: View {
-    @EnvironmentObject var user: UserManager
+    @EnvironmentObject var userManager: UserManager
     
     var body: some View {
         Button(action: logout) {
@@ -25,14 +25,13 @@ struct ButtonLogout: View {
 extension ButtonLogout {
     private func logout() {
         StorageManager.shared.resetUserSettings()
-        user.checkUserSettings()
+        userManager.checkUserSettings()
     }
 }
 
 struct ButtonLogout_Previews: PreviewProvider {
     static var previews: some View {
         ButtonLogout()
-            .environmentObject(UserManager())
     }
 }
 

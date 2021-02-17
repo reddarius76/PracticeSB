@@ -13,7 +13,7 @@ class StorageManager {
     private let userDefaults = UserDefaults.standard
     private let key = "userDefaults"
     
-    func save(userSetting: UserSetting) {
+    func save(userSetting: User) {
         var userSettings = fetchUserSettings()
         userSettings.islogin = userSetting.islogin
         userSettings.name = userSetting.name
@@ -21,10 +21,9 @@ class StorageManager {
         userDefaults.set(data, forKey: key)
     }
     
-    func fetchUserSettings() -> UserSetting {
-        let defaultUser = UserSetting(islogin: false, name: "")
-        guard let data = userDefaults.object(forKey: key) as? Data else { return defaultUser }
-        guard let userSettings = try? JSONDecoder().decode(UserSetting.self, from: data) else { return defaultUser }
+    func fetchUserSettings() -> User {
+        guard let data = userDefaults.object(forKey: key) as? Data else { return User() }
+        guard let userSettings = try? JSONDecoder().decode(User.self, from: data) else { return User() }
         return userSettings
     }
     
@@ -37,9 +36,4 @@ class StorageManager {
     }
     
     private init() {}
-}
-
-struct UserSetting: Codable {
-    var islogin: Bool
-    var name: String
 }

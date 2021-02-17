@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct AuthView: View {
-    @EnvironmentObject var user: UserManager
     @State private var valueName = ""
     @State private var isDisabled = true
     @State private var colorCounter = Color(.red)
@@ -19,9 +18,15 @@ struct AuthView: View {
             VStack {
                 HStack {
                     TextFieldName(valueText: valueText)
-                    CounterValidation(valueName: valueName, colorCounter: colorCounter)
+                    CounterValidation(
+                        valueName: valueName,
+                        colorCounter: colorCounter
+                    )
                 }
-                ButtonLogin(valueName: $valueName, isDisabled: $isDisabled)
+                ButtonLogin(
+                    valueName: $valueName,
+                    isDisabled: $isDisabled
+                )
             }
         }
     }
@@ -47,6 +52,5 @@ extension AuthView {
 struct AuthView_Previews: PreviewProvider {
     static var previews: some View {
         AuthView()
-            .environmentObject(UserManager())
     }
 }
